@@ -1,12 +1,11 @@
 # hadoop:2.7.7
 
-FROM mcr.microsoft.com/java/jdk:8u192-zulu-ubuntu
+FROM openjdk:8u282
 
 ARG REPOSITORY_URL=http://194.5.188.112:8080
 ARG HADOOP_VERSION=2.7.7
 
 ENV PATH=$PATH:/opt/hadoop/bin:/opt/hadoop/sbin \
-    JAVA_HOME=/usr/lib/jvm/zulu-8-azure-amd64 \
     HADOOP_HOME=/opt/hadoop \
     HDFS_NAMENODE_USER="root" \
     HDFS_DATANODE_USER="root" \

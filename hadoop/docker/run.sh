@@ -4,24 +4,22 @@ set -euo pipefail
 
 templater.sh
 if [ ${HADOOP_ROLE} == "datanode" ]; then
-    DAEMON_SCRIPT=hadoop
+    SCRIPT=hdfs
     rm -rf /var/lib/hadoop/current
 fi
 
 if [ ${HADOOP_ROLE} == "namenode" ]; then
-    DAEMON_SCRIPT=hadoop
+    SCRIPT=hdfs
 fi
 
 if [ ${HADOOP_ROLE} == "nodemanager" ]; then
-    DAEMON_SCRIPT=yarn
+    SCRIPT=yarn
     rm -rf /var/lib/hadoop/current
 fi
 
 if [ ${HADOOP_ROLE} == "resourcemanager" ]; then
-    DAEMON_SCRIPT=yarn
+    SCRIPT=yarn
     rm -rf /var/lib/hadoop/current
 fi
 
-${DAEMON_SCRIPT}-daemon.sh start "${HADOOP_ROLE}"
-HOSTNAME=$(hostname)
-tail -f /var/log/hadoop/${DAEMON_SCRIPT}--${HADOOP_ROLE}-${HOSTNAME}.out --lines 1000
+${SCRIPT} "${HADOOP_ROLE}"
